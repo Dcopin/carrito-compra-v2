@@ -4,11 +4,11 @@ import app.model.Producto;
 import app.model.ShoppingCart;
 import app.service.IProductoService;
 import app.service.IShoppingCartService;
-import jakarta.servlet.http.Cookie;
+
 import org.junit.Before;
 import org.junit.Test;
 import org.springframework.mock.web.MockHttpServletRequest;
-import org.springframework.mock.web.MockHttpServletResponse;
+
 import org.springframework.ui.ExtendedModelMap;
 import org.springframework.web.servlet.mvc.support.RedirectAttributesModelMap;
 import java.util.List;
@@ -21,7 +21,6 @@ public class ShoppingCartControllerTest {
     private IShoppingCartService carrito;
     private ShoppingCartController controlador;
     private MockHttpServletRequest solicitud;
-    private MockHttpServletResponse respuesta;
     private ExtendedModelMap modelo;
     private RedirectAttributesModelMap redireccion;
     private static final String CODIGO = "sesion-prueba";
@@ -32,7 +31,6 @@ public class ShoppingCartControllerTest {
         carrito = mock(IShoppingCartService.class);
         controlador = new ShoppingCartController(productos, carrito);
         solicitud = new MockHttpServletRequest();
-        respuesta = new MockHttpServletResponse();
         modelo = new ExtendedModelMap();
         redireccion = new RedirectAttributesModelMap();
     }
@@ -63,7 +61,7 @@ public class ShoppingCartControllerTest {
         prepararSesion();
         ShoppingCart esperado = new ShoppingCart();
         when(carrito.getShoppingCart(CODIGO)).thenReturn(esperado);
-        assertEquals("shopping-cart", controlador.mostrarCarrito(modelo, solicitud, respuesta));
+        assertEquals("shopping-cart", controlador.mostrarCarrito(modelo, solicitud));
         assertSame(esperado, modelo.get("shoppingCart"));
         verify(carrito).getShoppingCart(CODIGO);
     }
@@ -72,7 +70,7 @@ public class ShoppingCartControllerTest {
     public void testMostrarCarritoFallido() {
         prepararSesion();
         when(carrito.getShoppingCart(CODIGO)).thenThrow(new IllegalStateException("Datos invalidos"));
-        controlador.mostrarCarrito(modelo, solicitud, respuesta);
+        controlador.mostrarCarrito(modelo, solicitud);
     }
 
     @Test
@@ -108,7 +106,7 @@ public class ShoppingCartControllerTest {
         prepararSesion();
         when(carrito.deleteItem(CODIGO, 1)).thenReturn(true);
         assertEquals("redirect:/shopping-cart",
-                controlador.eliminarProducto(1, redireccion, solicitud, respuesta));
+                controlador.eliminarProducto(1, redireccion, solicitud));
         assertEquals("Producto eliminado del carrito.", redireccion.getFlashAttributes().get("mensaje"));
         verify(carrito).deleteItem(CODIGO, 1);
     }
@@ -117,7 +115,7 @@ public class ShoppingCartControllerTest {
     public void testEliminarProductoFallido() {
         prepararSesion();
         when(carrito.deleteItem(CODIGO, null)).thenThrow(new IllegalArgumentException("ID invalido"));
-        controlador.eliminarProducto(null, redireccion, solicitud, respuesta);
+        controlador.eliminarProducto(null, redireccion, solicitud);
     }
 
     @Test
@@ -125,7 +123,7 @@ public class ShoppingCartControllerTest {
         prepararSesion();
         when(carrito.deleteItem(CODIGO, 1)).thenReturn(false);
         assertEquals("redirect:/shopping-cart",
-                controlador.eliminarProducto(1, redireccion, solicitud, respuesta));
+                controlador.eliminarProducto(1, redireccion, solicitud));
         assertEquals("El producto no estaba en el carrito.", redireccion.getFlashAttributes().get("mensaje"));
     }
 
@@ -133,7 +131,7 @@ public class ShoppingCartControllerTest {
     public void testVaciarCarritoExitoso() {
         prepararSesion();
         when(carrito.deleteAllItems(CODIGO)).thenReturn(true);
-        assertEquals("redirect:/shopping-cart", controlador.vaciarCarrito(redireccion, solicitud, respuesta));
+        assertEquals("redirect:/shopping-cart", controlador.vaciarCarrito(redireccion, solicitud));
         assertEquals("El carrito está vacío.", redireccion.getFlashAttributes().get("mensaje"));
         verify(carrito).deleteAllItems(CODIGO);
     }
@@ -142,20 +140,20 @@ public class ShoppingCartControllerTest {
     public void testVaciarCarritoFallido() {
         prepararSesion();
         when(carrito.deleteAllItems(CODIGO)).thenThrow(new IllegalStateException("Error al eliminar"));
-        controlador.vaciarCarrito(redireccion, solicitud, respuesta);
+        controlador.vaciarCarrito(redireccion, solicitud);
     }
 
     @Test
     public void testVaciarCarritoYaVacio() {
         prepararSesion();
         when(carrito.deleteAllItems(CODIGO)).thenReturn(false);
-        assertEquals("redirect:/shopping-cart", controlador.vaciarCarrito(redireccion, solicitud, respuesta));
+        assertEquals("redirect:/shopping-cart", controlador.vaciarCarrito(redireccion, solicitud));
         assertEquals("El carrito ya estaba vacío.", redireccion.getFlashAttributes().get("mensaje"));
     }
 
     @Test
     public void testConsultarSinSesionNoLaCrea() {
-        assertEquals("shopping-cart", controlador.mostrarCarrito(modelo, solicitud, respuesta));
+        assertEquals("shopping-cart", controlador.mostrarCarrito(modelo, solicitud));
         assertTrue(((ShoppingCart) modelo.get("shoppingCart")).getItem().isEmpty());
         assertNull(solicitud.getSession(false));
         verifyNoInteractions(carrito);
@@ -164,20 +162,16 @@ public class ShoppingCartControllerTest {
     @Test
     public void testEliminarSinSesionGeneraAviso() {
         assertEquals("redirect:/shopping-cart",
-                controlador.eliminarProducto(1, redireccion, solicitud, respuesta));
-        Cookie aviso = respuesta.getCookie("cartNotice");
-        assertNotNull(aviso);
-        assertEquals("PRODUCTO_AUSENTE", aviso.getValue());
+                controlador.eliminarProducto(1, redireccion, solicitud));
+        assertEquals("El producto no estaba en el carrito.", redireccion.getFlashAttributes().get("mensaje"));
         assertNull(solicitud.getSession(false));
         verifyNoInteractions(carrito);
     }
 
     @Test
     public void testVaciarSinSesionGeneraAviso() {
-        assertEquals("redirect:/shopping-cart", controlador.vaciarCarrito(redireccion, solicitud, respuesta));
-        Cookie aviso = respuesta.getCookie("cartNotice");
-        assertNotNull(aviso);
-        assertEquals("CARRITO_VACIO", aviso.getValue());
+        assertEquals("redirect:/shopping-cart", controlador.vaciarCarrito(redireccion, solicitud));
+        assertEquals("El carrito ya estaba vacío.", redireccion.getFlashAttributes().get("mensaje"));
         assertNull(solicitud.getSession(false));
         verifyNoInteractions(carrito);
     }
@@ -195,7 +189,7 @@ public class ShoppingCartControllerTest {
     public void testManejarParametrosInvalidos() {
         prepararSesion();
         assertEquals("redirect:/shopping-cart",
-                controlador.manejarParametrosInvalidos(redireccion, solicitud, respuesta));
+                controlador.manejarParametrosInvalidos(redireccion));
         assertEquals("Revisa los datos enviados: los parámetros requeridos deben ser números enteros.",
                 redireccion.getFlashAttributes().get("error"));
         verifyNoInteractions(carrito, productos);
@@ -204,7 +198,7 @@ public class ShoppingCartControllerTest {
     @Test
     public void testToString(){
         String obtenido = controlador.toString().toLowerCase();
-        String esperado = "shoppingcartcontroller(productoservice=mock for iproductoservice, hashcode: 1189651769, carritoservice=mock for ishoppingcartservice, hashcode: 467632528)";
+        String esperado = ("ShoppingCartController(productoService=" + productos + ", carritoService=" + carrito + ")").toLowerCase();
 
         assertEquals(esperado,obtenido);
     }
