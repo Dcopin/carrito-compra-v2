@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+<head th:fragment="head(title)">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title th:text="${title}">Carrito de compra</title>
+    <link rel="icon" th:href="@{/images/icons/shopping-cart.svg}">
+    <link rel="stylesheet" th:href="@{/assets/css/normalize.css}">
+    <link rel="stylesheet" th:href="@{/assets/css/style.css}">
+    <link rel="stylesheet" th:href="@{/assets/css/botones.css}">
+    <link rel="stylesheet" th:href="@{/assets/css/cssMensajeFlash.css}">
+    <link rel="stylesheet" th:href="@{/assets/css/input.css}">
+    <link rel="stylesheet" th:href="@{/assets/css/style-shopping-cart.css}">
+    <link rel="stylesheet" th:href="@{/assets/css/tblAgl.css}">
+    <link rel="stylesheet" th:href="@{/assets/css/globitos.css}">
+    <link rel="stylesheet" th:href="@{/assets/css/thymeleaf.css}">
+</head>
+<body>
+<header th:fragment="header">
+    <a class="skip-link" href="#contenido">Saltar al contenido</a>
+    <h1>Demostración de Carrito de Compra Básico</h1>
+    <h2>Elaborado con Spring Boot, Spring MVC y Thymeleaf</h2>
+</header>
+<div th:fragment="messages" class="mensajes" aria-live="polite">
+    <p th:if="${mensaje != null}" class="pFlashMensaje-info" role="status" th:text="${mensaje}"></p>
+    <p th:if="${error != null}" class="pFlashMensaje-error" role="alert" th:text="${error}"></p>
+</div>
+<!-- Product images are local paths, optionally prefixed by /images/ or product/. -->
+<img th:fragment="productImage(producto)"
+     th:with="path=${producto.imagen == null ? '' : producto.imagen.trim().replaceAll('/+', '/').replaceAll('^/+', '').replaceAll('^(images/)+', '')},
+              imagePath=${#strings.isEmpty(path) ? '/images/icons/shopping-cart.svg' : '/images/' + (#strings.startsWith(path, 'product/') or #strings.startsWith(path, 'icons/') ? path : 'product/' + path)}"
+     th:src="@{${imagePath}}" th:alt="${producto.nombre}" loading="lazy">
+</body>
+</html>

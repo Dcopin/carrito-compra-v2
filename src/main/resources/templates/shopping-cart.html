@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="~{base :: head('Carrito de compra')}"></head>
+<body>
+<header th:replace="~{base :: header}"></header>
+<main id="contenido" class="producto-cuadricula" th:with="articulos=${shoppingCart.item}">
+    <div th:replace="~{base :: messages}"></div>
+    <div class="cuadricula-titulo"><h3>Carrito de compra</h3></div>
+    <nav class="div-tit cart-navigation" aria-label="Navegación del carrito">
+        <a class="btn-carrito-compra2 apa bor-rad4" th:href="@{/}">
+            <img class="icon" th:src="@{/images/icons/back.svg}" alt="" aria-hidden="true"> Volver al catálogo
+        </a>
+        <a class="btn-carrito-compra2 apa bor-rad4" th:href="@{/shopping-cart}">
+            <img class="icon" th:src="@{/images/icons/refresh.svg}" alt="" aria-hidden="true"> Refrescar carrito
+        </a>
+    </nav>
+    <div th:if="${#lists.isEmpty(articulos)}" class="div-tit-vacio apa">
+        <p>Tu carrito de compra está vacío</p>
+        <div class="body-balloon" aria-hidden="true">
+            <div class="balloon"></div><div class="balloon"></div><div class="balloon"></div>
+            <div class="balloon"></div><div class="balloon"></div>
+        </div>
+    </div>
+    <div th:unless="${#lists.isEmpty(articulos)}">
+        <form class="cart-clear" method="post" th:action="@{/shopping-cart/vaciar}">
+            <button type="submit" class="btn-vaciar-carrito apa bor-rad3">Vaciar carrito</button>
+        </form>
+        <table class="tbl-agl-v2 table-hover">
+            <caption class="sr-only">Artículos del carrito de compra</caption>
+            <thead>
+            <tr>
+                <th scope="col">Imagen</th><th scope="col">Nombre</th><th scope="col">Código</th>
+                <th scope="col">Cantidad</th><th scope="col">Precio unitario</th>
+                <th scope="col">Subtotal</th><th scope="col">Acciones</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="articulo : ${articulos}">
+                <td data-label="Producto"><img th:replace="~{base :: productImage(${articulo.producto})}"></td>
+                <td data-label="Nombre" th:text="${articulo.producto.nombre}"></td>
+                <td data-label="Código" th:text="${articulo.producto.codigo}"></td>
+                <td data-label="Cantidad" th:text="${articulo.cantidad}"></td>
+                <td data-label="Precio unitario" th:text="${#numbers.formatDecimal(articulo.producto.precio, 1, 'NONE', 2, 'COMMA')}"></td>
+                <td data-label="Subtotal" th:text="${#numbers.formatDecimal(articulo.subtotal, 1, 'NONE', 2, 'COMMA')}"></td>
+                <td data-label="Acciones">
+                    <form method="post" th:action="@{/shopping-cart/eliminar}">
+                        <input type="hidden" name="idProducto" th:value="${articulo.producto.idProducto}">
+                        <button type="submit" class="h-o-s-c"
+                                th:attr="aria-label=|Eliminar ${articulo.producto.nombre} del carrito|">Eliminar</button>
+                    </form>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+    <p class="cart-total">Total: <strong th:text="${#numbers.formatDecimal(shoppingCart.total, 1, 'NONE', 2, 'COMMA')}">0,00</strong></p>
+</main>
+</body>
+</html>

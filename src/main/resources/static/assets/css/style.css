@@ -1,0 +1,111 @@
+:root {
+	--rojo: #D93025;
+	--blanco: #FFF;
+	--azul: #0077FF;
+	--azul2: #1A73E8;
+	--gris: #666;
+}
+
+body {
+    font-family: 'Roboto', sans-serif;
+    color: #211a1a;
+    font-size: 0.9em;
+    padding: 0 10px;
+}
+
+.producto-cuadricula {
+	margin-block-end: 40px;
+}
+
+.div-shopping-cart {
+	padding: 20px 0;
+}
+
+.bor-rad3 {
+	border-radius: 3px;
+}
+
+.bor-rad4 {
+	border-radius: 4px;
+}
+
+.btn-carrito-compra {
+    padding: 5px 10px;
+}
+
+.btn-carrito-compra.apa {
+    background-color: var(--blanco);
+    border: solid 1px var(--azul2);
+    color: var(--azul);
+    text-decoration: none;
+	cursor: pointer;
+}
+
+.btn-carrito-compra2 {
+	display: flex;
+    align-items: center;
+    justify-content: center;
+	gap: 8px;
+
+	box-sizing: border-box;
+	min-width: 80px;
+	height: 36px;
+	padding: 0 16px;
+}
+
+.btn-carrito-compra2.apa {
+
+	text-decoration: none;
+	outline: none;
+	cursor: pointer;
+	color: var(--azul2);
+	font-size: .875rem;
+    letter-spacing: .25px;
+	font-weight: 500;
+
+	background: none;
+	border: none;
+
+	box-shadow: inset 0 0 0 1px #dadce0;
+}
+
+.btn-carrito-compra2.apa:hover
+, .btn-carrito-compra2.apa:focus {
+	background-color: rgba(32,33,36,0.059);
+}
+
+.btn-carrito-compra2.apa:active {
+	box-shadow: 0 1px 2px 0 rgb(60 64 67 / 30%), 0 1px 3px 1px rgb(60 64 67 / 15%);
+    background-color: rgba(32,33,36,0.059);
+}
+
+.producto-item {
+	display: inline-block;
+	text-align: center;
+}
+
+@media screen and (max-width: 500px) {
+	.swal-modal-js {
+	    width: 100%;
+	    height: 100%;
+	    margin: 0;
+	    border-radius: 0;
+	}
+
+	.swal-footer-js {
+		position: absolute;
+    	bottom: 0;
+    	right: 0;
+	}
+
+	.swal-overlay-js:before {
+		height: auto;
+	}
+
+	.producto-lista {
+		display: flex;
+		flex-direction: column;
+		align-items: center;
+		gap: 30px;
+	}
+}

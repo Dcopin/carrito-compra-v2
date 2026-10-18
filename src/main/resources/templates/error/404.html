@@ -1,0 +1,13 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="~{base :: head('Página no encontrada')}"></head>
+<body>
+<header th:replace="~{base :: header}"></header>
+<main id="contenido">
+    <div th:replace="~{base :: messages}"></div>
+    <h3>Página no encontrada</h3>
+    <p>Lo lamentamos, esta página no existe en el sitio.</p>
+    <a class="h-o-s-c" th:href="@{/}">Volver al inicio</a>
+</main>
+</body>
+</html>

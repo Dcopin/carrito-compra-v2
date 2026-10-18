@@ -1,0 +1,37 @@
+/* Small adaptations for native forms, focus, messages and the original responsive table. */
+body { font-family: Roboto, Arial, sans-serif; }
+.producto-lista { display: flex; flex-wrap: wrap; gap: 30px; }
+.producto-item { width: 260px; max-width: 100%; }
+.producto-imagen img { width: 100%; height: 180px; object-fit: contain; }
+.producto-titulo { font-size: 1rem; margin: 12px 0; }
+.producto-precio { font-size: 1rem; }
+.producto-acciones { display: flex; justify-content: center; gap: 8px; }
+.producto-acciones input.qty { min-width: 4em; }
+.icon { width: 22px; height: 22px; }
+.div-shopping-cart { display: flex; }
+.cart-navigation { gap: 12px; flex-wrap: wrap; }
+.cart-clear { display: flex; justify-content: flex-end; margin: 16px 0; }
+.cart-clear button { cursor: pointer; min-height: 40px; }
+.tbl-agl-v2 img { width: 90px; height: 75px; object-fit: contain; }
+.tbl-agl-v2 td form { display: inline-block; }
+.tbl-agl-v2 td { overflow-wrap: anywhere; }
+.cart-total { text-align: right; font-size: 1.25rem; border-top: 1px solid #ddd; padding-top: 18px; }
+.mensajes p { overflow-wrap: anywhere; }
+a:focus-visible, button:focus-visible, input:focus-visible { outline: 3px solid #1a73e8; outline-offset: 3px; }
+.sr-only, .skip-link:not(:focus) { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip-path: inset(50%); white-space: nowrap; border: 0; }
+.skip-link:focus { display: inline-block; padding: 10px; }
+@media (max-width: 800px) {
+    .tbl-agl-v2 td { min-height: 28px; padding: 8px 0; }
+    .tbl-agl-v2 td::before { margin-right: 12px; }
+}
+@media (max-width: 500px) {
+    h1 { font-size: 1.6rem; }
+    h2 { font-size: 1.1rem; }
+    .producto-lista { align-items: stretch; }
+    .producto-item { width: 100%; }
+    .cart-navigation a { flex: 1 1 auto; }
+}
+@media (prefers-reduced-motion: reduce) {
+    .balloon { animation: none; }
+    .ripple { transition: none; }
+}

@@ -1,0 +1,29 @@
+.btn-vaciar-carrito {
+    padding: 5px 10px;
+}
+
+.btn-vaciar-carrito.apa {
+    background-color: var(--blanco);
+    border: solid 1px var(--rojo);
+    color: var(--rojo);
+    text-decoration: none;
+}
+
+.div-tit {
+    clear: both;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 5px 0;
+    position: relative;
+}
+
+.div-tit-vacio {
+	width: 100%;
+	display: inline-block;
+	text-align: center;
+}
+
+.div-tit-vacio.apa {
+	color: rgba(0,0,0,0.87);
+}

@@ -1,0 +1,13 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="~{base :: head('Error')}"></head>
+<body>
+<header th:replace="~{base :: header}"></header>
+<main id="contenido">
+    <div th:replace="~{base :: messages}"></div>
+    <h3>Ha ocurrido un error</h3>
+    <p>Lo lamentamos, ha ocurrido un error inesperado. Inténtalo de nuevo más tarde.</p>
+    <a class="h-o-s-c" th:href="@{/}">Volver al inicio</a>
+</main>
+</body>
+</html>

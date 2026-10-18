@@ -1,0 +1,203 @@
+/*Begin Styled Boxes*/
+
+p.pFlashMensaje-info {
+    -moz-border-radius: 6px;
+    -webkit-border-radius: 6px;
+    background-color: #f0f7fb;
+    border: solid 1px #3498db;
+    border-radius: 6px;
+    line-height: 18px;
+    mc-auto-number-format: '{b}info: {/b}';
+    overflow: hidden;
+    padding: 12px;
+}
+
+p.pFlashMensaje-error {
+    -moz-border-radius: 6px;
+    -webkit-border-radius: 6px;
+    background-color: #f9e7e5;
+    border: solid 1px #c0392b;
+    border-radius: 6px;
+    line-height: 18px;
+    mc-auto-number-format: '{b}error: {/b}';
+    overflow: hidden;
+    padding: 12px;
+}
+
+p.pFlashMensaje-exito {
+    -moz-border-radius: 6px;
+    -webkit-border-radius: 6px;
+    background-color: #e7f6f0;
+    border: solid 1px #27ae60;
+    border-radius: 6px;
+    line-height: 18px;
+    mc-auto-number-format: '{b}exito: {/b}';
+    overflow: hidden;
+    padding: 12px;
+}
+
+p.pivFlashMensaje-aviso {
+    -moz-border-radius: 6px;
+    -webkit-border-radius: 6px;
+    background-color: #fffbea;
+    border: solid 1px #f1c40f;
+    border-bottom-color: #ffd700;
+    border-radius: 6px;
+    line-height: 18px;
+    mc-auto-number-format: '{b}aviso: {/b}';
+    overflow: hidden;
+    padding: 12px;
+}
+
+p.pFlashMensaje-infoAlt {
+    background-color: #f0f7fb;
+    border-left: solid 4px #3498db;
+    line-height: 18px;
+    mc-auto-number-format: '{b}info: {/b}';
+    overflow: hidden;
+    padding: 12px;
+}
+
+p.pFlashMensaje-errorAlt {
+    background-color: #fcf7f2;
+    border-left: solid 4px #e74c3c;
+    line-height: 18px;
+    mc-auto-number-format: '{b}error: {/b}';
+    overflow: hidden;
+    padding: 12px;
+}
+
+p.pFlashMensaje-exitoAlt {
+    background-color: #e7f6f0;
+    border-left: solid 4px #2ecc71;
+    line-height: 18px;
+    mc-auto-number-format: '{b}exito: {/b}';
+    overflow: hidden;
+    padding: 12px;
+}
+
+p.pFlashMensaje-avisoAlt {
+    background-color: #fffbea;
+    border-left: solid 4px #f1c40f;
+    line-height: 18px;
+    mc-auto-number-format: '{b}aviso: {/b}';
+    overflow: hidden;
+    padding: 12px;
+}
+
+
+/*Div styles*/
+
+div.divFlashMensaje-info {
+    -moz-border-radius: 6px;
+    -webkit-border-radius: 6px;
+    background-color: #f0f7fb;
+    border: solid 1px #3498db;
+    border-radius: 6px;
+    line-height: 18px;
+    mc-auto-number-format: '{b}info: {/b}';
+    overflow: hidden;
+    padding: 12px;
+}
+
+div.divFlashMensaje-error {
+    -moz-border-radius: 6px;
+    -webkit-border-radius: 6px;
+    background-color: #f9e7e5;
+    border: solid 1px #c0392b;
+    border-radius: 6px;
+    line-height: 18px;
+    mc-auto-number-format: '{b}error: {/b}';
+    overflow: hidden;
+    padding: 12px;
+}
+
+div.divFlashMensaje-exito {
+    -moz-border-radius: 6px;
+    -webkit-border-radius: 6px;
+    background-color: #e7f6f0;
+    border: solid 1px #27ae60;
+    border-radius: 6px;
+    line-height: 18px;
+    mc-auto-number-format: '{b}exito: {/b}';
+    overflow: hidden;
+    padding: 12px;
+}
+
+div.divFlashMensaje-aviso {
+    -moz-border-radius: 6px;
+    -webkit-border-radius: 6px;
+    background-color: #fffbea;
+    border: solid 1px #f1c40f;
+    border-bottom-color: #ffd700;
+    border-radius: 6px;
+    line-height: 18px;
+    mc-auto-number-format: '{b}aviso: {/b}';
+    overflow: hidden;
+    padding: 12px;
+}
+
+div.divFlashMensaje-infoAlt,
+div.divFlashMensaje-infoAlt2,
+div.divFlashMensaje-errorAlt,
+div.divFlashMensaje-errorAlt2,
+div.divFlashMensaje-exitoAlt,
+div.divFlashMensaje-exitoAlt2,
+div.divFlashMensaje-avisoAlt,
+div.divFlashMensaje-avisoAlt2 {
+    font-family: 'Lato', Arial, sans-serif;
+    font-size: 14px;
+    color: #666;
+}
+
+div.divFlashMensaje-infoAlt,
+div.divFlashMensaje-infoAlt2 {
+    border-left: solid 4px #3498db;
+    line-height: 18px;
+    mc-auto-number-format: '{b}info: {/b}';
+    overflow: hidden;
+    padding: 12px;
+}
+
+div.divFlashMensaje-infoAlt2 {
+    background-color: #f0f7fb;
+}
+
+div.divFlashMensaje-errorAlt,
+div.divFlashMensaje-errorAlt2 {
+    border-left: solid 4px #e74c3c;
+    line-height: 18px;
+    mc-auto-number-format: '{b}error: {/b}';
+    overflow: hidden;
+    padding: 12px;
+}
+
+div.divFlashMensaje-errorAlt2 {
+    background-color: #fcf7f2;
+}
+
+div.divFlashMensaje-exitoAlt,
+div.divFlashMensaje-exitoAlt2 {
+    border-left: solid 4px #2ecc71;
+    line-height: 18px;
+    mc-auto-number-format: '{b}exito: {/b}';
+    overflow: hidden;
+    padding: 12px;
+}
+
+div.divFlashMensaje-exitoAlt2 {
+    background-color: #e7f6f0;
+}
+
+div.divFlashMensaje-avisoAlt,
+div.divFlashMensaje-avisoAlt2 {
+    border-left: solid 4px #f1c40f;
+    line-height: 18px;
+    mc-auto-number-format: '{b}aviso: {/b}';
+    overflow: hidden;
+    padding: 12px;
+}
+
+div.divFlashMensaje-avisoAlt2 {
+    background-color: #fffbea;
+}

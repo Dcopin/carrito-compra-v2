@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="~{base :: head('Catálogo de productos')}"></head>
+<body>
+<header th:replace="~{base :: header}"></header>
+<main id="contenido" class="producto-cuadricula">
+    <div th:replace="~{base :: messages}"></div>
+    <div class="cuadricula-titulo"><h3>Catálogo de productos</h3></div>
+    <nav class="div-shopping-cart" aria-label="Navegación del catálogo">
+        <a class="btn-carrito-compra2 apa bor-rad4" th:href="@{/shopping-cart}">
+            <img class="icon" th:src="@{/images/icons/shopping-cart.svg}" alt="" aria-hidden="true"> Carrito
+        </a>
+    </nav>
+    <p th:if="${#lists.isEmpty(productos)}" class="div-tit-vacio apa">No hay productos disponibles.</p>
+    <div class="producto-lista">
+        <article class="producto-item" th:each="producto : ${productos}">
+            <form method="post" th:action="@{/shopping-cart}">
+                <input type="hidden" name="idProducto" th:value="${producto.idProducto}">
+                <div class="producto-imagen"><img th:replace="~{base :: productImage(${producto})}"></div>
+                <div class="producto-pie-mosaico">
+                    <h4 class="producto-titulo" th:text="${producto.nombre}">Producto</h4>
+                    <p class="producto-precio">
+                        <span class="sr-only">Precio: </span>
+                        <span th:text="${#numbers.formatDecimal(producto.precio, 1, 'NONE', 2, 'COMMA')}">0,00</span>
+                    </p>
+                    <div class="producto-acciones">
+                        <label class="sr-only" th:for="|cantidad-${producto.idProducto}|"
+                               th:text="|Cantidad de ${producto.nombre}|">Cantidad</label>
+                        <input type="number" class="qty input-grande apa" name="cantidad"
+                               th:id="|cantidad-${producto.idProducto}|" value="1" min="1" step="1" required>
+                        <button type="submit" class="ripple" th:attr="aria-label=|Agregar ${producto.nombre} al carrito|">Agregar</button>
+                    </div>
+                </div>
+            </form>
+        </article>
+    </div>
+</main>
+</body>
+</html>
