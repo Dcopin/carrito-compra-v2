@@ -2,11 +2,11 @@ package app.repository;
 
 import app.model.ItemProducto;
 import org.springframework.data.jpa.repository.EntityGraph;
-import org.springframework.stereotype.Repository;
+import org.springframework.data.repository.Repository;
 import java.util.List;
 
-@Repository
-public interface IItemProductoRepository {
+
+public interface IItemProductoRepository extends Repository<ItemProducto, Integer> {
     @EntityGraph(attributePaths = "producto")
     List<ItemProducto> findByCodUsuarioOrderByIdShoppingCartAsc(String codUsuario);
     ItemProducto save(ItemProducto item);
